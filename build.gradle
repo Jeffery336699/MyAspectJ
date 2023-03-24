@@ -1,0 +1,9 @@
+plugins {
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
+    id "io.github.wurensen.android-aspectjx" version "3.3.2" apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

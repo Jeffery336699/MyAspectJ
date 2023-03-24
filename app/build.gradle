@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.github.wurensen.android-aspectjx'
+
+aspectjx {
+    // 排除所有package路径中包含`android.support`的class文件及库（jar文件）
+    exclude 'android.support'
+    // 移除kotlin相关，编译错误和提升速度
+    exclude 'kotlin.jvm', 'kotlin.internal'
+    exclude 'kotlinx.coroutines.internal', 'kotlinx.coroutines.android'
+    // 是否debug，开启后会输出织入信息等相关日志（3.3.0版本新增）
+    debug = true
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.myaspectj"
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
